@@ -1,0 +1,37 @@
+#!/usr/bin/env python
+
+# Assembles a file in binary-text to binary
+
+# Splits inputs by whitespace.
+# Each input is written to stdout in a little-endian byte-per-byte way.
+
+# Examples:
+
+# 00000010 00000000 00100000 00001000
+# assembles to
+# 00000010 00000000 00100000 00001000
+
+# 00001000001000000000000000000010
+# translates to
+# 00000010 00000000 00100000 00001000
+# as well.
+
+import sys
+
+def split_to_bytes_lsb_first(i):
+	res = []
+	while i > 255:
+		res.append(i % 256)
+		i //= 256
+	res.append(i)
+	return res
+
+if __name__ == '__main__':
+	while True:
+		line = sys.stdin.readline()
+		if not line:
+			break
+
+		for chunk in line.split():
+			for b in split_to_bytes_lsb_first(int(chunk, 2)):
+				sys.stdout.write(chr(b))
