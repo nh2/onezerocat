@@ -15,8 +15,7 @@ if __name__ == '__main__':
 		i = 1
 		while byte:
 			binstr = bin(ord(byte)).lstrip("0b")
-			print((8-len(binstr)) * '0' + binstr, end=' ')
-			if i % 4 == 0:
-				print()
+			end = '\n' if i % 4 == 0 else ' '
+			print((8-len(binstr)) * '0' + binstr, end=end)
 			i += 1
 			byte = f.read(1)
