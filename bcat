@@ -2,6 +2,8 @@
 
 # Prints a file in binary
 
+from __future__ import print_function
+
 import sys
 
 if __name__ == '__main__':
@@ -13,8 +15,8 @@ if __name__ == '__main__':
 		i = 1
 		while byte:
 			binstr = bin(ord(byte)).lstrip("0b")
-			print (8-len(binstr)) * '0' + binstr,
+			print((8-len(binstr)) * '0' + binstr, end=' ')
 			if i % 4 == 0:
-				print
+				print()
 			i += 1
 			byte = f.read(1)
